@@ -7,7 +7,7 @@ import {
     StyleSheet,
     TouchableOpacity,
 } from "react-native";
-import { AuthContext } from "../App";
+import AuthContext from "../AuthContext";
 
 const LoginScreen = ({ navigation, route }) => {
     const [email, setEmail] = useState(route.params.storedEmail);

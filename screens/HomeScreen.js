@@ -9,7 +9,7 @@ import {
     Image,
 } from "react-native";
 import { useEffect, useState } from "react";
-import { AuthContext } from "../App";
+import AuthContext from "../AuthContext";
 import GLOBALS from "../Globals";
 
 const HomeScreen = ({ navigation }) => {
@@ -79,6 +79,9 @@ const HomeScreen = ({ navigation }) => {
                         <FlatList
                             style={styles.clientList}
                             data={clientNames}
+                            keyExtractor={(item) => {
+                                return item.lastname;
+                            }}
                             ItemSeparatorComponent={separatorComponent}
                             renderItem={renderClient}
                         />

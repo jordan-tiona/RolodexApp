@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { format, parseISO, parse, formatISO } from "date-fns";
 import { useEffect, useState, useLayoutEffect } from "react";
-import { AuthContext } from "../App";
+import AuthContext from "../AuthContext";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { StackActions } from "@react-navigation/native";
 import GLOBALS from "../Globals";

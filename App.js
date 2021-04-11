@@ -10,10 +10,10 @@ import AddClientScreen from "./screens/AddClientScreen";
 import * as SecureStore from "expo-secure-store";
 import { ActivityIndicator } from "react-native";
 import GLOBALS from "./Globals";
+import AuthContext from "./AuthContext";
 
 const AuthStack = createStackNavigator();
 const RootStack = createStackNavigator();
-export const AuthContext = React.createContext();
 
 const RolodexApp = () => {
     //Global state
@@ -65,8 +65,8 @@ const RolodexApp = () => {
         }
     };
     //Token restoration
-    React.useEffect(async () => {
-        await retrieveStorage();
+    React.useEffect(() => {
+        retrieveStorage();
     }, []);
 
     //Auth context provider for login and logout

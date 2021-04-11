@@ -7,7 +7,7 @@ import {
     StyleSheet,
     TouchableOpacity,
 } from "react-native";
-import { AuthContext } from "../App";
+import AuthContext from "../AuthContext";
 
 const RegistrationScreen = () => {
     const [email, setEmail] = useState("");

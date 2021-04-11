@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { format, parseISO, parse, formatISO } from "date-fns";
 import { useEffect, useState, useLayoutEffect } from "react";
-import { AuthContext } from "../App";
+import AuthContext from "../AuthContext";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import GLOBALS from "../Globals";
 
@@ -109,7 +109,6 @@ const ClientScreen = ({ navigation, route }) => {
         })
             .then((response) => response.json())
             .then((json) => {
-                console.log(json);
                 if (json.status == "ok") {
                     navigation.navigate("Home");
                 } else {
@@ -525,7 +524,6 @@ const ClientScreen = ({ navigation, route }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        width: "100%",
         padding: 20,
     },
 
