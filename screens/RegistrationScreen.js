@@ -6,10 +6,13 @@ import {
     Image,
     StyleSheet,
     TouchableOpacity,
+    ScrollView,
 } from "react-native";
 import AuthContext from "../AuthContext";
 
 const RegistrationScreen = () => {
+    const [firstname, setFirstname] = useState("");
+    const [lastname, setLastname] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -17,11 +20,31 @@ const RegistrationScreen = () => {
     const { register } = React.useContext(AuthContext);
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Rolodex Client Management</Text>
-            <Image style={styles.logo} source={require("../assets/logo.png")} />
-            <Text style={styles.subtitle}>New User</Text>
-            <View style={styles.inputView}>
+        <ScrollView>
+            <View style={styles.container}>
+                <View style={styles.logoView}>
+                    <Text style={styles.title}>Rolodex Client Management</Text>
+                    <Image
+                        style={styles.logo}
+                        source={require("../assets/logo.png")}
+                    />
+                </View>
+                <TextInput
+                    style={styles.textInput}
+                    placeholder="First Name"
+                    placeholderTextColor="#003f5c"
+                    onChangeText={(firstname) => {
+                        setFirstname(firstname);
+                    }}
+                />
+                <TextInput
+                    style={styles.textInput}
+                    placeholder="Last Name"
+                    placeholderTextColor="#003f5c"
+                    onChangeText={(lastname) => {
+                        setLastname(lastname);
+                    }}
+                />
                 <TextInput
                     style={styles.textInput}
                     placeholder="Email"
@@ -30,8 +53,6 @@ const RegistrationScreen = () => {
                         setEmail(email);
                     }}
                 />
-            </View>
-            <View style={styles.inputView}>
                 <TextInput
                     style={styles.textInput}
                     placeholder="Password"
@@ -41,8 +62,6 @@ const RegistrationScreen = () => {
                         setPassword(password);
                     }}
                 />
-            </View>
-            <View style={styles.inputView}>
                 <TextInput
                     style={styles.textInput}
                     placeholder="Confirm Password"
@@ -52,14 +71,24 @@ const RegistrationScreen = () => {
                         setConfirmPassword(confirmPassword);
                     }}
                 />
+                <View style={styles.registerButtonView}>
+                    <TouchableOpacity
+                        style={styles.registerButton}
+                        onPress={() =>
+                            register(
+                                firstname,
+                                lastname,
+                                email,
+                                password,
+                                confirmPassword
+                            )
+                        }
+                    >
+                        <Text style={styles.registerText}>Register</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
-            <TouchableOpacity
-                style={styles.registerButton}
-                onPress={() => register(email, password, confirmPassword)}
-            >
-                <Text style={styles.registerText}>Register</Text>
-            </TouchableOpacity>
-        </View>
+        </ScrollView>
     );
 };
 
@@ -67,59 +96,54 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#fff",
+        justifyContent: "flex-start",
+    },
+
+    logoView: {
         alignItems: "center",
-        justifyContent: "center",
     },
 
     title: {
         fontSize: 24,
         fontWeight: "bold",
+        margin: 20,
     },
-
-    subtitle: {
-        fontSize: 20,
-        fontWeight: "bold",
-        marginBottom: 30,
-    },
-
     logo: {
-        width: "50%",
-        height: "40%",
-    },
-
-    inputView: {
-        backgroundColor: "lightblue",
-        borderRadius: 30,
-        width: "70%",
-        height: 45,
-        marginBottom: 20,
-        alignItems: "center",
+        width: 200,
+        height: 200,
     },
 
     textInput: {
-        height: 50,
-        flex: 1,
+        backgroundColor: "#fff",
+        borderRadius: 10,
+        borderWidth: 1,
+        textAlign: "center",
         padding: 10,
-        marginLeft: 20,
+        margin: 10,
+    },
+
+    buttonRow: {
+        flexDirection: "row",
+        justifyContent: "space-around",
+        marginTop: 10,
     },
 
     forgotPassword: {
-        height: 30,
-        marginRight: 10,
+        fontSize: 16,
     },
 
     newUser: {
-        height: 30,
-        marginLeft: 10,
+        fontSize: 16,
+    },
+
+    registerButtonView: {
+        margin: 30,
     },
 
     registerButton: {
-        width: "80%",
-        height: 50,
         borderRadius: 25,
+        padding: 16,
         alignItems: "center",
-        justifyContent: "center",
-        marginBottom: 30,
         backgroundColor: "darkblue",
     },
 

@@ -407,7 +407,6 @@ const ClientScreen = ({ navigation, route }) => {
                             onChange={(event, date) => {
                                 if (date) {
                                     setEditBirthday(false);
-                                    console.log(client.dateofbirth);
                                     setClient((prevState) => ({
                                         ...prevState,
                                         dateofbirth: format(

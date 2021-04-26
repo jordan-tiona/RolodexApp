@@ -109,7 +109,13 @@ const RolodexApp = () => {
             dispatch({ type: "LOGOUT" });
         },
 
-        register: async (email, password, confirmPassword) => {
+        register: async (
+            firstname,
+            lastname,
+            email,
+            password,
+            confirmPassword
+        ) => {
             if (password == confirmPassword) {
                 await fetch(GLOBALS.API_URL + "users", {
                     method: "POST",
@@ -117,6 +123,8 @@ const RolodexApp = () => {
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
+                        firstname: firstname,
+                        lastname: lastname,
                         email: email,
                         password: password,
                     }),

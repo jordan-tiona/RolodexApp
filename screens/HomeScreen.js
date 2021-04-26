@@ -16,14 +16,33 @@ const HomeScreen = ({ navigation }) => {
     const { getToken, logout } = React.useContext(AuthContext);
     const [isLoading, setLoading] = useState(true);
     const [clientNames, setClientNames] = useState([]);
+    const [firstname, setFirstname] = useState("");
+    const [lastname, setLastname] = useState("");
 
     useEffect(() => {
         const refresh = navigation.addListener("focus", () => {
+            getUser();
             downloadClients();
         });
 
         return refresh;
     });
+
+    const getUser = () => {
+        token = getToken();
+        fetch(GLOBALS.API_URL + "auth", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: token,
+            },
+        })
+            .then((response) => response.json())
+            .then((json) => {
+                setFirstname(json.user.firstname);
+                setLastname(json.user.lastname);
+            });
+    };
 
     const downloadClients = () => {
         token = getToken();
@@ -72,7 +91,9 @@ const HomeScreen = ({ navigation }) => {
                             style={styles.profile}
                             source={require("../assets/profile.png")}
                         />
-                        <Text style={styles.userName}>John Smith</Text>
+                        <Text style={styles.userName}>
+                            {firstname} {lastname}
+                        </Text>
                     </View>
                     <View style={styles.clientListView}>
                         <Text style={styles.clientHeader}>Clients</Text>
